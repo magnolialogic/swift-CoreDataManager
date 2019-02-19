@@ -33,7 +33,7 @@ class CoreDataManager {
     }()
     
     // Create shared FRC for TestItems, sorted by "testKey"
-    lazy var itemsFetchedResultsController: NSFetchedResultsController<TestItems> = {
+    lazy var fetchedResultsController: NSFetchedResultsController<TestItems> = {
         let fetchRequest = TestItems.createFetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "testKey", ascending: true)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -42,7 +42,6 @@ class CoreDataManager {
     
     // Commit changes made to managed context
     func saveContext() {
-        print(#function)
         if managedContext.hasChanges {
             do {
                 try managedContext.save()
